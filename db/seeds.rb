@@ -8,9 +8,9 @@
 Day.destroy_all
 ExchangeRate.destroy_all
 
-date = (Time.now)
+date = Time.now
 5.times do
-  date = (date-1.day)
+  date = date - 1.day
   date_ymd = date.strftime("%Y-%m-%d")
   day = Day.create(date: date_ymd)
   url = "https://api.fixer.io/#{date_ymd}?base=USD"
