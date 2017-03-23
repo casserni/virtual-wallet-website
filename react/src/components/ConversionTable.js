@@ -4,7 +4,9 @@ class ConversionTable extends Component {
     super(props);
     this.state = {
       value: 1,
+      yesterdayValue: 1,
       exchangeRates:[],
+      yesterdayRates:[],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -12,7 +14,19 @@ class ConversionTable extends Component {
   }
 
   handleChange(event) {
+    let yesterdayValue;
+    this.state.exchangeRates.forEach((rate) => {
+      if(rate.rate == event.target.value) {
+        this.state.yesterdayRates.forEach((yesterdayRate)=> {
+          if(rate.symbol === yesterdayRate.symbol){
+            yesterdayValue = yesterdayRate.rate
+          }
+        });
+      }
+    });
+
     this.setState({value: event.target.value});
+    this.setState({yesterdayValue: yesterdayValue.toString()})
   }
 
   handleSubmit(event) {
@@ -22,16 +36,30 @@ class ConversionTable extends Component {
   componentDidMount() {
     this.props.getExchangeRates()
     .then(data => {
-      data = data.slice(-1)[0].exchange_rates;
-      this.setState({exchangeRates: data});
+      let today = data.slice(-1)[0].exchange_rates;
+      let yesterday = data.slice(-2)[0].exchange_rates;
+      this.setState({exchangeRates: today});
+      this.setState({yesterdayRates: yesterday});
     });
   }
 
   render() {
     let rates=[];
+    let todayValue = this.state.value
+    let yesterdayValue = this.state.yesterdayValue
     let options = this.state.exchangeRates.map((rate, index) => {
-      rates.push(<li key={index}>{rate.symbol}: {(rate.rate/this.state.value).toFixed(3)}</li>);
-      return( <option key={index} value={rate.rate}>{rate.symbol}</option> );
+      let yesterdayRate = null;
+      this.state.yesterdayRates.forEach((yesterday)=> {
+        if(yesterday.symbol === rate.symbol){
+          yesterdayRate = yesterday.rate/yesterdayValue;
+        }
+      });
+      let todayRate = rate.rate/todayValue;
+
+      if(rate.rate != todayValue) {
+        rates.push(<li key={index}>{rate.symbol}: {(todayRate).toFixed(3)} {(todayRate - yesterdayRate).toFixed(3)} {((todayRate - yesterdayRate)/yesterdayRate * 100).toFixed(3)}</li>);
+        }
+        return( <option key={index} value={rate.rate}>{rate.symbol}</option> );
     });
     return (
       <div>
