@@ -21,18 +21,18 @@ class ConversionTable extends Component {
 
   componentDidMount() {
     this.props.getExchangeRates()
-      .then(data => {
-        data = data.slice(-1)[0].exchange_rates
-        this.setState({exchangeRates: data});
-      });
+    .then(data => {
+      data = data.slice(-1)[0].exchange_rates;
+      this.setState({exchangeRates: data});
+    });
   }
 
   render() {
-    let rates=[]
+    let rates=[];
     let options = this.state.exchangeRates.map((rate, index) => {
-      rates.push(<li key={index}>{rate.symbol}: {(rate.rate/this.state.value).toFixed(3)}</li>)
-      return( <option key={index} value={rate.rate}>{rate.symbol}</option> )
-    })
+      rates.push(<li key={index}>{rate.symbol}: {(rate.rate/this.state.value).toFixed(3)}</li>);
+      return( <option key={index} value={rate.rate}>{rate.symbol}</option> );
+    });
     return (
       <div>
       <form onSubmit={this.handleSubmit}>
@@ -46,5 +46,5 @@ class ConversionTable extends Component {
       </div>
     );
   }
-}
+};
 export default ConversionTable

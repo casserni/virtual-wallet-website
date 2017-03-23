@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class DeleteWallet extends Component {
   constructor(props) {
     super(props);
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -24,8 +23,8 @@ class DeleteWallet extends Component {
       }
     })
     .then(response=>{
-      this.props.getWallets()
-    })
+      this.props.getWallets();
+    });
   }
 
   render() {
@@ -35,6 +34,6 @@ class DeleteWallet extends Component {
       </form>
     );
   }
-}
+};
 
 export default DeleteWallet

@@ -16,18 +16,18 @@ class TradeForm extends Component {
   }
 
   handleChange(event) {
-    let target = event.target
-    let name = target.name
-    let value = target.value
+    let target = event.target;
+    let name = target.name;
+    let value = target.value;
     this.setState({[name]: value});
 
     this.state.exchangeRates.forEach((rate) =>{
       if (rate.rate == value &&  name === 'base_rate') {
-        this.setState({symbol_base: rate.symbol})
+        this.setState({symbol_base: rate.symbol});
       } else if (rate.rate == value &&  name === 'new_rate') {
-        this.setState({symbol_new: rate.symbol})
+        this.setState({symbol_new: rate.symbol});
       }
-    })
+    });
   }
 
   handleSubmit(event) {
@@ -62,26 +62,26 @@ class TradeForm extends Component {
       }
     })
     .then(response=>{
-      this.props.getAmounts()
-    })
+      this.props.getAmounts();
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
     let base_amount;
     let new_amount;
     if (this.state.base_amount !== prevState.base_amount) {
-      new_amount = (this.state.base_amount * this.state.new_rate/this.state.base_rate).toFixed(4)
-      this.setState({new_amount: new_amount.toString()})
+      new_amount = (this.state.base_amount * this.state.new_rate/this.state.base_rate).toFixed(4);
+      this.setState({new_amount: new_amount.toString()});
     } else if (this.state.new_amount !== prevState.new_amount) {
-        base_amount = (this.state.new_amount * this.state.base_rate/this.state.new_rate).toFixed(4)
-        this.setState({base_amount: base_amount.toString()})
+        base_amount = (this.state.new_amount * this.state.base_rate/this.state.new_rate).toFixed(4);
+        this.setState({base_amount: base_amount.toString()});
       }
   }
 
   componentDidMount() {
     this.props.getExchangeRates()
       .then(data => {
-        data = data.slice(-1)[0].exchange_rates
+        data = data.slice(-1)[0].exchange_rates;
         this.setState({exchangeRates: data});
       });
   }

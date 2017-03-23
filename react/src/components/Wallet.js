@@ -8,8 +8,8 @@ class Wallet extends Component {
     this.state = {
       amounts:[],
     };
-    this.getAmounts = this.getAmounts.bind(this)
-    this.sortAmounts = this.sortAmounts.bind(this)
+    this.getAmounts = this.getAmounts.bind(this);
+    this.sortAmounts = this.sortAmounts.bind(this);
   }
 
   sortAmounts() {
@@ -45,12 +45,12 @@ class Wallet extends Component {
   }
 
   componentDidMount(){
-    this.getAmounts()
+    this.getAmounts();
   }
 
   render() {
-    this.sortAmounts()
-    
+    this.sortAmounts();
+
     let amounts = this.state.amounts.map((amount, index) => {
       return( <li key={index}>{amount.symbol}: {amount.quantity}</li> )
     })

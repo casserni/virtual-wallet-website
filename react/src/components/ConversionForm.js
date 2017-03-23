@@ -17,18 +17,18 @@ class ConversionForm extends Component {
   }
 
   handleChange(event) {
-    let target = event.target
-    let name = target.name
-    let value = target.value
+    let target = event.target;
+    let name = target.name;
+    let value = target.value;
     this.setState({[name]: value});
 
     this.state.exchangeRates.forEach((rate) =>{
       if (rate.rate == value &&  name === 'base') {
-        this.setState({symbol_base: rate.symbol})
+        this.setState({symbol_base: rate.symbol});
       } else if (rate.rate == value &&  name === 'new') {
-        this.setState({symbol_new: rate.symbol})
+        this.setState({symbol_new: rate.symbol});
       }
-    })
+    });
   }
 
   handleSubmit(event) {
@@ -38,16 +38,15 @@ class ConversionForm extends Component {
   componentDidMount() {
     this.props.getExchangeRates()
       .then(data => {
-        data = data.slice(-1)[0].exchange_rates
+        data = data.slice(-1)[0].exchange_rates;
         this.setState({exchangeRates: data});
       });
   }
 
   render() {
-    debugger
     let options = this.state.exchangeRates.map((rate, index) => {
-      return( <option key={index} value={rate.rate}>{rate.symbol}</option> )
-    })
+      return( <option key={index} value={rate.rate}>{rate.symbol}</option> );
+    });
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -68,6 +67,6 @@ class ConversionForm extends Component {
       </div>
     );
   }
-}
+};
 
 export default ConversionForm

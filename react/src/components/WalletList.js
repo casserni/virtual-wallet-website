@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Wallet from './Wallet.js'
-import NewWalletForm from './NewWalletForm.js'
+import Wallet from './Wallet.js';
+import NewWalletForm from './NewWalletForm.js';
 
 class WalletList extends Component {
   constructor(props) {
@@ -27,10 +27,10 @@ class WalletList extends Component {
   }
 
   componentWillMount(){
-    this.setState({user_id: document.getElementById('current_user').innerHTML})
+    this.setState({user_id: document.getElementById('current_user').innerHTML});
   }
   componentDidMount() {
-    this.getWallets()
+    this.getWallets();
   }
 
   render() {
@@ -56,9 +56,9 @@ class WalletList extends Component {
               getWallets = {this.getWallets}
               getExchangeRates = {this.props.getExchangeRates}
             />
-          )
+          );
         }
-      })
+      });
     }
 
     return (
@@ -68,7 +68,7 @@ class WalletList extends Component {
         </ul>
         {selectedWallet}
       </div>
-    )
+    );
   }
 }
 export default WalletList

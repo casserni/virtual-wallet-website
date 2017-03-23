@@ -7,7 +7,6 @@ class NewWalletForm extends Component {
       user_id: 0,
       name: 'New Wallet',
       base: 'USD',
-      user_id: null,
       exchangeRates:[],
     };
 
@@ -16,9 +15,9 @@ class NewWalletForm extends Component {
   }
 
   handleChange(event) {
-    let target = event.target
-    let name = target.name
-    let value = target.value
+    let target = event.target;
+    let name = target.name;
+    let value = target.value;
     this.setState({[name]: value});
   }
 
@@ -52,15 +51,15 @@ class NewWalletForm extends Component {
       }
     })
     .then(response=>{
-      this.props.getWallets()
-    })
+      this.props.getWallets();
+    });
   }
 
   componentDidMount() {
-    this.setState({user_id: document.getElementById('current_user').innerHTML})
+    this.setState({user_id: document.getElementById('current_user').innerHTML});
     this.props.getExchangeRates()
       .then(data => {
-        data = data.slice(-1)[0].exchange_rates
+        data = data.slice(-1)[0].exchange_rates;
         this.setState({exchangeRates: data});
       });
   }
