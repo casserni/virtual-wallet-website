@@ -38,3 +38,8 @@ body {
 label {
   color: inherit;
 }
+
+.conversionratestable{
+  list-style-type: none;
+  padding: 0;
+}
