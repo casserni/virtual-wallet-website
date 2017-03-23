@@ -10,6 +10,59 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require foundation
  *= require_tree .
  *= require_self
+ *= require default_html
  */
+
+#current_user {
+   visibility: hidden;
+}
+
+body {
+   background-image: url("world.jpg");
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-attachment:fixed;
+   background-position: top;
+}
+
+.info{
+  font-weight: 500;
+  background-color: black;
+  opacity: .85;
+  color: white;
+}
+
+label {
+  color: inherit;
+}
+
+
+/*.styled-select {
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+  height: 29px;
+  overflow: hidden;
+  width: 80px;
+}
+
+.styled-select select {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  height: 29px;
+  padding: 5px;
+  width: 268px;
+}
+
+.semi-square {
+  -webkit-appearance: default;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.blue {
+  background-color: white;
+}*/

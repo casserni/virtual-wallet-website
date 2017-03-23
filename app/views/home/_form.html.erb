@@ -1,6 +1,0 @@
-<%= form_tag api_v1_currencies_path, method: :get, id:'conversion-form' do %>
-  <%= text_field_tag :amount, params[:amount], id: 'amount-field' %>
-  <%=select_tag "base", options_for_select(@currency_collection)%>
-  <%=select_tag "unit", options_for_select(@currency_collection)%>
-  <%= submit_tag 'Convert' %>
-<% end %>
