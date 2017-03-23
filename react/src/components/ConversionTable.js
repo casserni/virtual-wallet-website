@@ -19,14 +19,14 @@ class ConversionTable extends Component {
       if(rate.rate == event.target.value) {
         this.state.yesterdayRates.forEach((yesterdayRate)=> {
           if(rate.symbol === yesterdayRate.symbol){
-            yesterdayValue = yesterdayRate.rate
+            yesterdayValue = yesterdayRate.rate;
           }
         });
       }
     });
 
     this.setState({value: event.target.value});
-    this.setState({yesterdayValue: yesterdayValue.toString()})
+    this.setState({yesterdayValue: yesterdayValue.toString()});
   }
 
   handleSubmit(event) {
@@ -38,6 +38,7 @@ class ConversionTable extends Component {
     .then(data => {
       let today = data.slice(-1)[0].exchange_rates;
       let yesterday = data.slice(-2)[0].exchange_rates;
+      
       this.setState({exchangeRates: today});
       this.setState({yesterdayRates: yesterday});
     });
@@ -45,8 +46,9 @@ class ConversionTable extends Component {
 
   render() {
     let rates=[];
-    let todayValue = this.state.value
-    let yesterdayValue = this.state.yesterdayValue
+    let todayValue = this.state.value;
+    let yesterdayValue = this.state.yesterdayValue;
+
     let options = this.state.exchangeRates.map((rate, index) => {
       let yesterdayRate = null;
       this.state.yesterdayRates.forEach((yesterday)=> {
@@ -61,6 +63,7 @@ class ConversionTable extends Component {
         }
         return( <option key={index} value={rate.rate}>{rate.symbol}</option> );
     });
+
     return (
       <div>
       <form onSubmit={this.handleSubmit}>
