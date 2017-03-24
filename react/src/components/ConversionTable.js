@@ -36,8 +36,8 @@ class ConversionTable extends Component {
   componentDidMount() {
     this.props.getExchangeRates()
     .then(data => {
-      let today = data.slice(-1)[0].exchange_rates;
-      let yesterday = data.slice(-2)[0].exchange_rates;
+      let today = data[0].exchange_rates;
+      let yesterday = data[1].exchange_rates;
 
       this.setState({exchangeRates: today});
       this.setState({yesterdayRates: yesterday});
@@ -48,18 +48,21 @@ class ConversionTable extends Component {
     let rates=[];
     let todayValue = this.state.value;
     let yesterdayValue = this.state.yesterdayValue;
+    let yesterdayRates = this.state.yesterdayRates;
 
     let options = this.state.exchangeRates.map((rate, index) => {
       let yesterdayRate = null;
-      this.state.yesterdayRates.forEach((yesterday)=> {
+
+      yesterdayRates.forEach((yesterday)=> {
         if(yesterday.symbol === rate.symbol){
           yesterdayRate = yesterday.rate/yesterdayValue;
         }
       });
+
       let todayRate = rate.rate/todayValue;
 
       if(rate.rate != todayValue) {
-        rates.push(<li key={index}>{rate.symbol}: {(todayRate).toFixed(3)} {(todayRate - yesterdayRate).toFixed(3)} {((todayRate - yesterdayRate)/yesterdayRate * 100).toFixed(3)}%</li>);
+        rates.push(<li key={index}>{rate.symbol}: {(todayRate).toFixed(3)} {((todayRate - yesterdayRate)/yesterdayRate * 100).toFixed(3)}%</li>);
         }
         return( <option key={index} value={rate.rate}>{rate.symbol}</option> );
     });

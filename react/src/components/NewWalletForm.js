@@ -59,7 +59,7 @@ class NewWalletForm extends Component {
     this.setState({user_id: document.getElementById('current_user').innerHTML});
     this.props.getExchangeRates()
       .then(data => {
-        data = data.slice(-1)[0].exchange_rates;
+        data = data[0].exchange_rates;
         this.setState({exchangeRates: data});
       });
   }

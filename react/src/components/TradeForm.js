@@ -81,7 +81,7 @@ class TradeForm extends Component {
   componentDidMount() {
     this.props.getExchangeRates()
       .then(data => {
-        data = data.slice(-1)[0].exchange_rates;
+        data = data[0].exchange_rates;
         this.setState({exchangeRates: data});
       });
   }
