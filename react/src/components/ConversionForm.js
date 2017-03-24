@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LineGraph from './LineGraph.js'
 
 class ConversionForm extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class ConversionForm extends Component {
       symbol_base:'USD',
       symbol_new:'USD',
       exchangeRates:[],
+      historicalRates:[],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,7 +40,8 @@ class ConversionForm extends Component {
   componentDidMount() {
     this.props.getExchangeRates()
       .then(data => {
-        data = data.slice(-1)[0].exchange_rates;
+        this.setState({historicalRates: data});
+        data = data[0].exchange_rates;
         this.setState({exchangeRates: data});
       });
   }
@@ -49,21 +52,30 @@ class ConversionForm extends Component {
     });
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Amount:
-            <input type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
-          </label>
-          <div className="styled-select blue semi-square">
-          <select name='base' value={this.state.base} onChange={this.handleChange}>
-            {options}
-          </select>
-          </div>
-          <select name='new' value={this.state.new} onChange={this.handleChange}>
-            {options}
-          </select>
-        </form>
-        <p> {this.state.amount} {this.state.symbol_base} = {(this.state.amount * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
+        <div className='info'>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Amount:
+              <input type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
+            </label>
+            <div className="styled-select blue semi-square">
+            <select name='base' value={this.state.base} onChange={this.handleChange}>
+              {options}
+            </select>
+            </div>
+            <select name='new' value={this.state.new} onChange={this.handleChange}>
+              {options}
+            </select>
+          </form>
+          <p> {this.state.amount} {this.state.symbol_base} = {(this.state.amount * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
+        </div>
+        <div className='info'>
+          < LineGraph
+            data={this.state.historicalRates}
+            baseSymbol = {this.state.symbol_base}
+            newSymbol = {this.state.symbol_new}
+          />
+        </div>
       </div>
     );
   }
