@@ -48,10 +48,10 @@ class ConversionTable extends Component {
     let rates=[];
     let todayValue = this.state.value;
     let yesterdayValue = this.state.yesterdayValue;
-    let yesterdayRates = this.state.yesterdayRates
+    let yesterdayRates = this.state.yesterdayRates;
 
     let options = this.state.exchangeRates.map((rate, index) => {
-      let yesterdayRate = null
+      let yesterdayRate = null;
 
       yesterdayRates.forEach((yesterday)=> {
         if(yesterday.symbol === rate.symbol){

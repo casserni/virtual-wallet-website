@@ -4,7 +4,7 @@ import {Line} from 'react-chartjs-2';
 
 class LineGraph extends Component {
   constructor(props){
-    super(props)
+    super(props);
     }
 
   render() {
@@ -18,7 +18,7 @@ class LineGraph extends Component {
       let baseRate;
       let rate;
       days.push(new Date(data.date).toDateString());
-      
+
       data.exchange_rates.forEach((rate)=>{
         if(rate.symbol === baseSymbol){
           baseRate = rate.rate;
@@ -26,10 +26,11 @@ class LineGraph extends Component {
         if(rate.symbol === newSymbol){
           newRate = rate.rate;
         }
-      })
+      });
       rate = (newRate / baseRate).toFixed(4);
       rates.push(rate);
     });
+
     const data = {
       labels: days.reverse(),
 

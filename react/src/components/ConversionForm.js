@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LineGraph from './LineGraph.js'
+import LineGraph from './LineGraph.js';
 
 class ConversionForm extends Component {
   constructor(props) {
