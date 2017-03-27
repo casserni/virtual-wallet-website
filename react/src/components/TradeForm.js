@@ -66,17 +66,17 @@ class TradeForm extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    let base_amount;
-    let new_amount;
-    if (this.state.base_amount !== prevState.base_amount) {
-      new_amount = (this.state.base_amount * this.state.new_rate/this.state.base_rate).toFixed(4);
-      this.setState({new_amount: new_amount.toString()});
-    } else if (this.state.new_amount !== prevState.new_amount) {
-        base_amount = (this.state.new_amount * this.state.base_rate/this.state.new_rate).toFixed(4);
-        this.setState({base_amount: base_amount.toString()});
-      }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   let base_amount;
+  //   let new_amount;
+  //   if (this.state.base_amount !== prevState.base_amount) {
+  //     new_amount = (this.state.base_amount * this.state.new_rate/this.state.base_rate).toFixed(4);
+  //     this.setState({new_amount: new_amount.toString()});
+  //   } else if (this.state.new_amount !== prevState.new_amount) {
+  //       base_amount = (this.state.new_amount * this.state.base_rate/this.state.new_rate).toFixed(4);
+  //       this.setState({base_amount: base_amount.toString()});
+  //     }
+  // }
 
   componentDidMount() {
     this.props.getExchangeRates()

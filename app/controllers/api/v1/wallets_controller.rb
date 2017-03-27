@@ -23,20 +23,28 @@ class Api::V1::WalletsController < ApplicationController
   end
 
   def update
-    symbol_base = trade_params[:symbol_base]
-    symbol_new = trade_params[:symbol_new]
-    amount = trade_params[:amount].to_f
+    if !params[:add_funds].nil?
+      base = Amount.where(wallet_id: params[:id], symbol: add_funds_params[:base])[0]
+      base.update_attribute(:quantity, (base.quantity + add_funds_params[:amount].to_f))
 
-    if symbol_base != symbol_new
-      base = Amount.where(wallet_id: params[:id], symbol: symbol_base)[0]
-      base.update_attribute(:quantity, (base.quantity - amount))
-      newc = Amount.where(wallet_id: params[:id], symbol: symbol_new)[0]
-      new_amount = amount * trade_params[:new_rate].to_f / trade_params[:base_rate].to_f
+    elsif !params[:trade].nil?
+      symbol_base = trade_params[:symbol_base]
+      symbol_new = trade_params[:symbol_new]
+      amount = trade_params[:amount].to_f
 
-      if newc.nil?
-        Amount.create(wallet_id: params[:id], symbol: symbol_new, quantity: new_amount)
-      else
-        newc.update_attribute(:quantity, (newc.quantity + new_amount))
+      if symbol_base != symbol_new
+        base = Amount.where(wallet_id: params[:id], symbol: symbol_base)[0]
+        if base.quantity - amount >= 0
+          base.update_attribute(:quantity, (base.quantity - amount))
+          newc = Amount.where(wallet_id: params[:id], symbol: symbol_new)[0]
+          new_amount = amount * trade_params[:new_rate].to_f / trade_params[:base_rate].to_f
+
+          if newc.nil?
+            Amount.create(wallet_id: params[:id], symbol: symbol_new, quantity: new_amount)
+          else
+            newc.update_attribute(:quantity, (newc.quantity + new_amount))
+          end
+        end
       end
     end
   end
@@ -58,9 +66,7 @@ class Api::V1::WalletsController < ApplicationController
     params.require(:trade).permit(:amount, :base_rate, :new_rate, :symbol_base, :symbol_new)
   end
 
-  def generate_wallet(wallet_id)
-    ExchangeRate.all.each do |rate|
-      Amount.create(symbol: rate.symbol, wallet_id: wallet_id)
-    end
+  def add_funds_params
+    params.require(:add_funds).permit(:amount, :base)
   end
 end
