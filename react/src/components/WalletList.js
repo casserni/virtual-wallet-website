@@ -35,10 +35,10 @@ class WalletList extends Component {
 
   render() {
     let walletList = this.state.wallets.map((wallet, index) => {
-      return(<li key={index} id={wallet.id} onClick={this.handleClick}>{wallet.name}</li> )
+      return(<li className='wallet' key={index} id={wallet.id} onClick={this.handleClick}>{wallet.name}</li> )
     })
 
-    walletList.push(<li key={-1} id={0} onClick={this.handleClick}>New Wallet</li>)
+    walletList.push(<li className='wallet' key={-1} id={0} onClick={this.handleClick}>New Portfolio</li>)
 
     let selectedWallet;
     if (this.state.currentWallet === 0){
@@ -64,7 +64,7 @@ class WalletList extends Component {
 
     return (
       <div>
-        <ul>
+        <ul className='wlist'>
           {walletList}
         </ul>
         {selectedWallet}

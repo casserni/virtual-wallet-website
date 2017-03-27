@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323151146) do
+ActiveRecord::Schema.define(version: 20170327180046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20170323151146) do
     t.string  "symbol",                  null: false
     t.float   "quantity",  default: 0.0
     t.integer "wallet_id",               null: false
+  end
+
+  create_table "currencies", force: :cascade do |t|
+    t.string  "base"
+    t.integer "day_id"
   end
 
   create_table "days", force: :cascade do |t|

@@ -9,9 +9,10 @@ class ConversionForm extends Component {
       base: 1,
       new: 1,
       symbol_base:'USD',
-      symbol_new:'USD',
+      symbol_new:'EUR',
       exchangeRates:[],
       historicalRates:[],
+      date: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,8 +42,14 @@ class ConversionForm extends Component {
     this.props.getExchangeRates()
       .then(data => {
         this.setState({historicalRates: data});
+        this.setState({date: data[0].date});
         data = data[0].exchange_rates;
         this.setState({exchangeRates: data});
+        data.forEach((currency)=>{
+          if (currency.symbol ==="EUR"){
+            this.setState({new: currency.rate});
+          }
+        });
       });
   }
 
@@ -53,31 +60,39 @@ class ConversionForm extends Component {
     return (
       <div>
         <div className='info'>
-          <form onSubmit={this.handleSubmit}>
-          <div className='row form'>
-            <div className='3-small column'>
-            <label>
-              Amount:
-              <input type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
-            </label>
-            </div>
-            <div className="styled-select blue semi-square">
-            <select name='base' value={this.state.base} onChange={this.handleChange}>
-              {options}
-            </select>
-            </div>
-            <select name='new' value={this.state.new} onChange={this.handleChange}>
-              {options}
-            </select>
-            </div>
-          </form>
-          <p> {this.state.amount} {this.state.symbol_base} = {(this.state.amount * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
-        </div>
-        <div className='info'>
+          <div className='row'>
+          <div className ='small-10 small-centered column'>
+            <form onSubmit={this.handleSubmit}>
+              <div className='row'>
+                <p className='small-2 column padding words'> Convert:</p>
+                <label className='small-5 column padding'>
+                  <input className='textbox' type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
+                </label>
+                <div className='small-2 column padding'>
+                  <select name='base' value={this.state.base} onChange={this.handleChange}>
+                    {options}
+                  </select>
+                </div>
+                <p className='small-1 column padding words'> to </p>
+                <div className='small-2 column padding'>
+                  <select name='new' value={this.state.new} onChange={this.handleChange}>
+                    {options}
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          </div>
+          <p className="conversion"> {this.state.amount} {this.state.symbol_base} = {(this.state.amount * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
+          <div className='row'>
+            <p className='small-4 column'> 1 {this.state.symbol_base} = {(1 * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
+            <p className='small-4 column'> 1 {this.state.symbol_new} = {(1 * this.state.base/this.state.new).toFixed(3)} {this.state.symbol_base} </p>
+          </div>
+          <p className="updated"> last updated {this.state.date} 16:00 CET </p>
           < LineGraph
-            data={this.state.historicalRates}
-            baseSymbol = {this.state.symbol_base}
-            newSymbol = {this.state.symbol_new}
+          data={this.state.historicalRates}
+          baseSymbol = {this.state.symbol_base}
+          newSymbol = {this.state.symbol_new}
           />
         </div>
       </div>

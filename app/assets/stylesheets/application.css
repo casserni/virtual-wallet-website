@@ -11,9 +11,9 @@
  * It is generally better to create a new file per style scope.
  *
  *= require foundation
+ *= require default_html
  *= require_tree .
  *= require_self
- *= require default_html
  */
 
 #current_user {
@@ -30,9 +30,12 @@ body {
 
 .info{
   font-weight: 500;
-  background-color: black;
-  opacity: .85;
+  background-color: #0f0f0f;
+  opacity: .92;
   color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 25px;
 }
 
 label {
@@ -42,4 +45,48 @@ label {
 .conversionratestable{
   list-style-type: none;
   padding: 0;
+}
+
+.percent{
+  text-align:right;
+}
+
+td {
+  font-size: 75%;
+}
+
+.rate {
+  text-align: center;
+}
+
+.p {
+  color: #52e417;
+}
+
+.n {
+  color: red;
+}
+
+.wlist {
+    list-style-type: none;
+    padding: 0px;
+    overflow: hidden;
+    background-color: inherit;
+}
+
+.wallet {
+  font-size: 80%;
+  padding: 10px;
+  float: left;
+
+}
+
+.wallet:hover {
+    background-color: black;
+    cursor:pointer;
+}
+
+.textbox {
+  border-radius: 5px;
+  background-color: white;
 }

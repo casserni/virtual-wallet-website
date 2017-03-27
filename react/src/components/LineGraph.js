@@ -50,7 +50,7 @@ class LineGraph extends Component {
 
       datasets: [
         {
-          label: 'My First dataset',
+          label: baseSymbol+' to '+ newSymbol,
           fill: true,
           lineTension: 0.1,
           backgroundColor: 'rgba(75,192,192,0.4)',
@@ -74,9 +74,11 @@ class LineGraph extends Component {
     };
 
     return (
-      <div>
-        <h2>Line Example</h2>
+      <div className="row">
+        <div className='small-11 small-centered column'>
         <Line data={data} />
+        </div>
+        <br></br>
       </div>
     );
   }
