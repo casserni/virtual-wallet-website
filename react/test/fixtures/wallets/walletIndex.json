@@ -1,0 +1,60 @@
+[
+  {
+    "id": 1,
+    "name": "New Wallet",
+    "base": "USD",
+    "user_id": 1,
+    "user": {
+      "id": 1,
+      "email": "nicholascassera@gmail.com",
+      "created_at": "2017-03-23T15:53:22.333Z",
+      "updated_at": "2017-03-24T12:35:10.424Z"
+    },
+    "amounts": [
+      {
+        "id": 2,
+        "symbol": "CHF",
+        "quantity": 0.99203,
+        "wallet_id": 1
+      },
+      {
+        "id": 3,
+        "symbol": "EUR",
+        "quantity": 0.92713,
+        "wallet_id": 1
+      },
+      {
+        "id": 1,
+        "symbol": "USD",
+        "quantity": -17.0,
+        "wallet_id": 1
+      },
+      {
+        "id": 4,
+        "symbol": "CAD",
+        "quantity": 20.0085,
+        "wallet_id": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Nick's Wallet",
+    "base": "BGN",
+    "user_id": 1,
+    "user": {
+      "id": 1,
+      "email": "nicholascassera@gmail.com",
+      "created_at": "2017-03-23T15:53:22.333Z",
+      "updated_at": "2017-03-24T12:35:10.424Z"
+    },
+    "amounts": [
+      {
+        "id": 5,
+        "symbol": "BGN",
+        "quantity": 0.0,
+        "wallet_id": 2
+      }
+    ]
+  }
+]

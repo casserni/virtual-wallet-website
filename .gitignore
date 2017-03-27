@@ -21,3 +21,8 @@
 /react/coverage
 /coverage
 .env
+.DS_Store
+.simplecove
+
+# Ignore application configuration
+/config/application.yml

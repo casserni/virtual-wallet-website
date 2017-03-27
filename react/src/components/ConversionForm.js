@@ -54,10 +54,13 @@ class ConversionForm extends Component {
       <div>
         <div className='info'>
           <form onSubmit={this.handleSubmit}>
+          <div className='row form'>
+            <div className='3-small column'>
             <label>
               Amount:
               <input type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
             </label>
+            </div>
             <div className="styled-select blue semi-square">
             <select name='base' value={this.state.base} onChange={this.handleChange}>
               {options}
@@ -66,6 +69,7 @@ class ConversionForm extends Component {
             <select name='new' value={this.state.new} onChange={this.handleChange}>
               {options}
             </select>
+            </div>
           </form>
           <p> {this.state.amount} {this.state.symbol_base} = {(this.state.amount * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
         </div>
