@@ -42,14 +42,14 @@ class ConversionForm extends Component {
     this.props.getExchangeRates()
       .then(data => {
         this.setState({historicalRates: data});
-        this.setState({date: data[0].date})
+        this.setState({date: data[0].date});
         data = data[0].exchange_rates;
         this.setState({exchangeRates: data});
         data.forEach((currency)=>{
           if (currency.symbol ==="EUR"){
-            this.setState({new: currency.rate})
+            this.setState({new: currency.rate});
           }
-        })
+        });
       });
   }
 

@@ -65,10 +65,10 @@ class ConversionTable extends Component {
         let pn;
         let sign;
         if(todayRate - yesterdayRate > 0){
-          pn = "p"
-          sign = "+"
+          pn = "p";
+          sign = "+";
         } else{
-          pn = "n"
+          pn = "n";
         }
         rates.push(<tr><td key={index}>{rate.symbol}</td><td className="rate">{(todayRate).toFixed(3)}</td><td className={`percent ${pn}`}>{sign}{((todayRate - yesterdayRate)/yesterdayRate * 100).toFixed(3)}%</td></tr>);
         }
