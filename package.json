@@ -21,6 +21,7 @@
     "karma": "^0.13.22",
     "karma-coverage": "^0.5.5",
     "karma-jasmine": "^0.3.8",
+    "karma-json-fixtures-preprocessor": "0.0.6",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
@@ -45,6 +46,7 @@
     "redux": "^3.5.2",
     "redux-form": "^5.2.3",
     "redux-thunk": "^2.1.0",
-    "webpack": "^1.13.0"
+    "webpack": "^1.13.0",
+    "whatwg-fetch": "1.0.0"
   }
 }

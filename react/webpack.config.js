@@ -1,6 +1,7 @@
 var config = {
   entry: {
     path: './react/src/main.js',
+
   },
   output: {
     path: './app/assets/javascripts',
@@ -16,7 +17,7 @@ var config = {
     ]
   },
   devtool: 'eval-source-map'
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
   delete config.devtool;

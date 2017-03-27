@@ -3,13 +3,15 @@ import jasmineEnzyme from 'jasmine-enzyme';
 import React from 'react';
 import $ from 'jquery';
 import 'jasmine-ajax';
+import createResponseFromFixture from './support/createResponseFromFixture';
 
 Object.assign(global, {
   jasmineEnzyme,
   mount,
   React,
   shallow,
-  $
+  $,
+  createResponseFromFixture
 });
 
 beforeEach(() => {
