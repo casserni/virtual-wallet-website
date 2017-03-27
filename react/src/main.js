@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import ConversionForm from './components/ConversionForm.js';
 import ConversionTable from './components/ConversionTable.js';
 import WalletList from './components/WalletList.js';
-import { getExchangeRates, getWallets } from './data.js'
+import { getExchangeRates, getWallets } from './data.js';
 
 $(function() {
   ReactDOM.render( < ConversionForm getExchangeRates={getExchangeRates}/>, document.getElementById('ConversionForm'));

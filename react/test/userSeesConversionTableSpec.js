@@ -1,12 +1,12 @@
 import ConversionTable from '../src/components/ConversionTable';
-import { getExchangeRates } from '../src/data.js'
+import { getExchangeRates } from '../src/data.js';
 
 describe('ConversionTable', () => {
   let wrapper;
 
   beforeEach(() => {
     spyOn(global, 'fetch').and.returnValue(
-      createResponseFromFixture('days/dayIndex'),
+      createResponseFromFixture('days/dayIndex');
     );
   });
 
