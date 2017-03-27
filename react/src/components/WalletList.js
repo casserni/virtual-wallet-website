@@ -48,11 +48,12 @@ class WalletList extends Component {
         if (this.state.currentWallet === wallet.id) {
           return(
             <Wallet
-              key={index}
+              key = {index}
               id = {wallet.id}
               user_id = {this.state.user_id}
-              name={wallet.name}
-              amounts={wallet.amounts}
+              name = {wallet.name}
+              base = {wallet.base}
+              amounts = {wallet.amounts}
               getWallets = {this.getWallets}
               getExchangeRates = {this.props.getExchangeRates}
             />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import DeleteWallet from './DeleteWallet.js'
-import TradeForm from './TradeForm.js'
+import DeleteWallet from './DeleteWallet.js';
+import TradeForm from './TradeForm.js';
+import AddFunds from './AddFunds.js';
 
 class Wallet extends Component {
   constructor(props) {
@@ -54,12 +55,19 @@ class Wallet extends Component {
     let amounts = this.state.amounts.map((amount, index) => {
       return( <li key={index}>{amount.symbol}: {amount.quantity}</li> )
     })
+
     return (
       <div>
         <p>{this.props.name}</p>
         <ul>
           {amounts}
         </ul>
+        <AddFunds
+          wallet_id = {this.props.id}
+          user_id = {this.props.user_id}
+          base = {this.props.base}
+          getAmounts = {this.getAmounts}
+        />
         <TradeForm
           wallet_id = {this.props.id}
           user_id = {this.props.user_id}
