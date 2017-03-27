@@ -5,7 +5,7 @@ class NewWalletForm extends Component {
     super(props);
     this.state = {
       user_id: 0,
-      name: 'New Wallet',
+      name: 'New Portfolio',
       base: 'USD',
       exchangeRates:[],
     };

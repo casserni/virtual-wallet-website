@@ -62,7 +62,15 @@ class ConversionTable extends Component {
       let todayRate = rate.rate/todayValue;
 
       if(rate.rate != todayValue) {
-        rates.push(<li key={index}>{rate.symbol}: {(todayRate).toFixed(3)} {((todayRate - yesterdayRate)/yesterdayRate * 100).toFixed(3)}%</li>);
+        let pn;
+        let sign;
+        if(todayRate - yesterdayRate > 0){
+          pn = "p"
+          sign = "+"
+        } else{
+          pn = "n"
+        }
+        rates.push(<tr><td key={index}>{rate.symbol}</td><td className="rate">{(todayRate).toFixed(3)}</td><td className={`percent ${pn}`}>{sign}{((todayRate - yesterdayRate)/yesterdayRate * 100).toFixed(3)}%</td></tr>);
         }
         return( <option key={index} value={rate.rate}>{rate.symbol}</option> );
     });
@@ -70,13 +78,17 @@ class ConversionTable extends Component {
     return (
       <div>
       <form onSubmit={this.handleSubmit}>
-        <select value={this.state.value} onChange={this.handleChange}>
-          {options}
-        </select>
+        <div className='row'>
+          <div className='small-8 small-centered column'>
+          <select value={this.state.value} onChange={this.handleChange}>
+            {options}
+          </select>
+          </div>
+        </div>
       </form>
-      <ul className="conversionratestable">
+      <table>
         {rates}
-      </ul>
+      </table>
       </div>
     );
   }
