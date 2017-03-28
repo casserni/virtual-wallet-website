@@ -5,13 +5,13 @@ class Api::V1::WalletsController < ApplicationController
 
   def index
     @user_id = params[:user_id].to_i
-    render json: Wallet.where(user_id: @user_id), include:['user','amounts']
+    render json: Wallet.where(user_id: @user_id), include: ['user', 'amounts', 'transactions']
   end
 
   def show
     @user_id = params[:user_id].to_i
     @wallet_id = params[:id].to_i
-    render json: Wallet.where(user_id: @user_id, id: @wallet_id)[0], include:['user','amounts']
+    render json: Wallet.where(user_id: @user_id, id: @wallet_id)[0], include: ['user', 'amounts', 'transactions']
   end
 
   def create
@@ -19,6 +19,7 @@ class Api::V1::WalletsController < ApplicationController
     if @wallet.save
       flash[:notice] = "Wallet added successfully"
       Amount.create(wallet_id: @wallet.id, symbol: wallet_params[:base])
+      Transaction.create(wallet_id: @wallet.id, body: "#{@wallet.name} was created")
     end
   end
 
@@ -26,6 +27,7 @@ class Api::V1::WalletsController < ApplicationController
     if !params[:add_funds].nil?
       base = Amount.where(wallet_id: params[:id], symbol: add_funds_params[:base])[0]
       base.update_attribute(:quantity, (base.quantity + add_funds_params[:amount].to_f))
+      Transaction.create(wallet_id: params[:id], body: "#{add_funds_params[:amount].to_f} #{add_funds_params[:base]} was deposited")
 
     elsif !params[:trade].nil?
       symbol_base = trade_params[:symbol_base]
@@ -38,6 +40,8 @@ class Api::V1::WalletsController < ApplicationController
           base.update_attribute(:quantity, (base.quantity - amount))
           newc = Amount.where(wallet_id: params[:id], symbol: symbol_new)[0]
           new_amount = amount * trade_params[:new_rate].to_f / trade_params[:base_rate].to_f
+
+          Transaction.create(wallet_id: params[:id], body: "#{amount} #{symbol_base} was traded for #{new_amount} #{symbol_new}")
 
           if newc.nil?
             Amount.create(wallet_id: params[:id], symbol: symbol_new, quantity: new_amount)

@@ -8,8 +8,10 @@ class Wallet extends Component {
     super(props);
     this.state = {
       amounts:[],
+      transactions:[],
     };
     this.getAmounts = this.getAmounts.bind(this);
+    this.getTransactions = this.getTransactions.bind(this);
     this.sortAmounts = this.sortAmounts.bind(this);
   }
 
@@ -45,8 +47,27 @@ class Wallet extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  getTransactions() {
+    fetch(`http://localhost:3000/api/v1/users/${this.props.user_id}/wallets/${this.props.id}.json`)
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+          let errorMessage = `${response.status} ($response.statusText)`,
+            error = new Error(errorMessage);
+          throw(error);
+        }
+    })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({transactions: body.transactions});
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   componentDidMount(){
     this.getAmounts();
+    this.getTransactions();
   }
 
   render() {
@@ -54,6 +75,10 @@ class Wallet extends Component {
 
     let amounts = this.state.amounts.map((amount, index) => {
       return( <li key={index}>{amount.symbol}: {amount.quantity}</li> )
+    })
+
+    let transactions = this.state.transactions.map((transaction, index)=>{
+      return( <li key={index}>{transaction.body}</li> )
     })
 
     return (
@@ -67,18 +92,23 @@ class Wallet extends Component {
           user_id = {this.props.user_id}
           base = {this.props.base}
           getAmounts = {this.getAmounts}
+          getTransactions = {this.getTransactions}
         />
         <TradeForm
           wallet_id = {this.props.id}
           user_id = {this.props.user_id}
           getAmounts = {this.getAmounts}
           getExchangeRates = {this.props.getExchangeRates}
+          getTransactions = {this.getTransactions}
         />
         <DeleteWallet
           wallet_id = {this.props.id}
           user_id = {this.props.user_id}
           getWallets = {this.props.getWallets}
         />
+        <ul>
+          {transactions}
+        </ul>
       </div>
     )
   }

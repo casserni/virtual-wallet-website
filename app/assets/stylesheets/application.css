@@ -20,18 +20,11 @@
    visibility: hidden;
 }
 
-body {
-   background-image: url("world1.jpg");
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-attachment:fixed;
-   background-position: top;
-}
 
 .info{
   font-weight: 500;
-  background-color: #0f0f0f;
-  opacity: .92;
+  background-color: #282537;
+  opacity: .9;
   color: white;
   border-radius: 15px;
   overflow: hidden;
@@ -53,6 +46,16 @@ label {
 
 td {
   font-size: 75%;
+  padding: 4px;
+  border-bottom:1pt solid #423e5b;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.conversionrow {
+  border-bottom: solid;
 }
 
 .rate {
@@ -89,4 +92,21 @@ td {
 .textbox {
   border-radius: 5px;
   background-color: white;
+}
+
+
+body {
+  margin: 0px;
+  background-image: url("world1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position: top;
+  font-family: "Lato";
+}
+
+.dropdown{
+  font-family: "Lato";
+  text-align: center;
+  text-align-last: center;
 }

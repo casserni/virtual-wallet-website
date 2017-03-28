@@ -47,6 +47,7 @@ class AddFunds extends Component {
     })
     .then(response=>{
       this.props.getAmounts();
+      this.props.getTransactions();
     });
   }
 

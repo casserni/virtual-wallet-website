@@ -5,7 +5,7 @@ class ConversionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount:'1',
+      amount:'1.00',
       base: 1,
       new: 1,
       symbol_base:'USD',
@@ -60,8 +60,13 @@ class ConversionForm extends Component {
     return (
       <div>
         <div className='info'>
+          <p className="conversion"> {this.state.amount} {this.state.symbol_base} = {(this.state.amount * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
           <div className='row'>
-          <div className ='small-10 small-centered column'>
+            <p className='small-6 column cfb'> 1 {this.state.symbol_base} = {(1 * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
+            <p className='small-6 column cfn'> 1 {this.state.symbol_new} = {(1 * this.state.base/this.state.new).toFixed(3)} {this.state.symbol_base} </p>
+          </div>
+          <div className='row'>
+          <div className ='small-6 small-centered column'>
             <form onSubmit={this.handleSubmit}>
               <div className='row'>
                 <p className='small-2 column padding words'> Convert:</p>
@@ -69,13 +74,13 @@ class ConversionForm extends Component {
                   <input className='textbox' type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
                 </label>
                 <div className='small-2 column padding'>
-                  <select name='base' value={this.state.base} onChange={this.handleChange}>
+                  <select name='base' value={this.state.base} onChange={this.handleChange} className='dropdown cfd'>
                     {options}
                   </select>
                 </div>
                 <p className='small-1 column padding words'> to </p>
                 <div className='small-2 column padding'>
-                  <select name='new' value={this.state.new} onChange={this.handleChange}>
+                  <select name='new' value={this.state.new} onChange={this.handleChange} className='dropdown cfd'>
                     {options}
                   </select>
                 </div>
@@ -83,17 +88,12 @@ class ConversionForm extends Component {
             </form>
           </div>
           </div>
-          <p className="conversion"> {this.state.amount} {this.state.symbol_base} = {(this.state.amount * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
-          <div className='row'>
-            <p className='small-4 column'> 1 {this.state.symbol_base} = {(1 * this.state.new/this.state.base).toFixed(3)} {this.state.symbol_new} </p>
-            <p className='small-4 column'> 1 {this.state.symbol_new} = {(1 * this.state.base/this.state.new).toFixed(3)} {this.state.symbol_base} </p>
-          </div>
-          <p className="updated"> last updated {this.state.date} 16:00 CET </p>
           < LineGraph
           data={this.state.historicalRates}
           baseSymbol = {this.state.symbol_base}
           newSymbol = {this.state.symbol_new}
           />
+          <p className="updated"> last updated {this.state.date} 16:00 CET </p>
         </div>
       </div>
     );
