@@ -17,3 +17,20 @@
 .words {
   margin-top: 18px;
 }
+
+.cfd{
+  height: 30px;
+  width: 50px;
+}
+
+.cfn {
+  text-align:left;
+  margin-bottom: 0px;
+  font-size: 80%
+}
+
+.cfb {
+  text-align:right;
+  margin-bottom: 0px;
+  font-size: 80%
+}

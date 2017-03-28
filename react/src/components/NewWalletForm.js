@@ -77,7 +77,7 @@ class NewWalletForm extends Component {
         </label>
         <label>
           Base currency:
-          <select name="base" value={this.state.value} onChange={this.handleChange}>
+          <select name="base" value={this.state.value} onChange={this.handleChange} className='dropdown'>
             {options}
           </select>
         </label>

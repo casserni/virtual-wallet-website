@@ -80,13 +80,13 @@ class ConversionTable extends Component {
       <form onSubmit={this.handleSubmit}>
         <div className='row'>
           <div className='small-8 small-centered column'>
-          <select value={this.state.value} onChange={this.handleChange}>
+          <select value={this.state.value} onChange={this.handleChange} className='dropdown'>
             {options}
           </select>
           </div>
         </div>
       </form>
-      <table>
+      <table cellspacing="0">
         {rates}
       </table>
       </div>

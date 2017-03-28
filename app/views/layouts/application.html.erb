@@ -5,28 +5,30 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato"/>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <nav class="top-bar" data-topbar role="navigation">
-      <div class="row">
-        <div class= "small-6 column">
-          <p>My Site</p>
-        </div>
-        <div class="small-6 column">
-          <% if user_signed_in? %>
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-          <%- else -%>
-            <%= link_to "Sign In", new_user_session_path%>
-            <%= link_to "Sign Up", new_user_registration_path %>
-          <% end %>
-        </div>
-      </div>
-    </nav>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <p class="menu-text"><span class=symbol>¢</span>Trade</p>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <% if user_signed_in? %>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+        <%- else -%>
+          <%= link_to "Sign In", new_user_session_path%>
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
     <%= yield %>
   </body>

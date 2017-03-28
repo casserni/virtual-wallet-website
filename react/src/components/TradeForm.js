@@ -98,10 +98,10 @@ class TradeForm extends Component {
             Amount:
             <input type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
           </label>
-          <select name='base_rate' value={this.state.base_rate} onChange={this.handleChange}>
+          <select name='base_rate' value={this.state.base_rate} onChange={this.handleChange} className='dropdown'>
             {options}
           </select>
-          <select name='new_rate' value={this.state.new_rate} onChange={this.handleChange}>
+          <select name='new_rate' value={this.state.new_rate} onChange={this.handleChange} className='dropdown'>
             {options}
           </select>
           <input type="submit" value="Trade" />
