@@ -31,7 +31,7 @@ class NewWalletForm extends Component {
       }
     });
 
-    fetch(`http://localhost:3000/api/v1/users/${this.state.user_id}/wallets.json`,
+    fetch(`https://ctrader.herokuapp.com/api/v1/users/${this.state.user_id}/wallets.json`,
       {
         method: "post",
         headers: {

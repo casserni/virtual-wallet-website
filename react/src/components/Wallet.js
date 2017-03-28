@@ -30,7 +30,7 @@ class Wallet extends Component {
   }
 
   getAmounts() {
-    fetch(`http://localhost:3000/api/v1/users/${this.props.user_id}/wallets/${this.props.id}.json`)
+    fetch(`https://ctrader.herokuapp.com/api/v1/users/${this.props.user_id}/wallets/${this.props.id}.json`)
     .then(response => {
       if (response.ok) {
         return response;
