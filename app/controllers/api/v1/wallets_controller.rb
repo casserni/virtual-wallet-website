@@ -5,7 +5,7 @@ class Api::V1::WalletsController < ApplicationController
 
   def index
     @user_id = params[:user_id].to_i
-    render json: Wallet.where(user_id: @user_id), include:['user','amounts', 'transactions']
+    render json: Wallet.where(user_id: @user_id), include: ['user', 'amounts', 'transactions']
   end
 
   def show
@@ -41,7 +41,7 @@ class Api::V1::WalletsController < ApplicationController
           newc = Amount.where(wallet_id: params[:id], symbol: symbol_new)[0]
           new_amount = amount * trade_params[:new_rate].to_f / trade_params[:base_rate].to_f
 
-          Transaction.create(wallet_id: params[:id], body:"#{amount} #{symbol_base} was traded for #{new_amount} #{symbol_new}")
+          Transaction.create(wallet_id: params[:id], body: "#{amount} #{symbol_base} was traded for #{new_amount} #{symbol_new}")
 
           if newc.nil?
             Amount.create(wallet_id: params[:id], symbol: symbol_new, quantity: new_amount)
