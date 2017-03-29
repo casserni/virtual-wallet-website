@@ -3,11 +3,11 @@ require "rails_helper"
 RSpec.describe Api::V1::WalletsController, type: :controller do
   describe "GET #index" do
     let!(:user) { FactoryGirl.create(:user) }
-    let!(:wallet){FactoryGirl.create(:wallet, user: user) }
-    let!(:wallet2){FactoryGirl.create(:wallet, user: user) }
-    let!(:amount1){ FactoryGirl.create(:amount, wallet: wallet) }
-    let!(:amount2){ FactoryGirl.create(:amount, wallet: wallet) }
-    let!(:transaction){ FactoryGirl.create(:transaction, wallet: wallet) }
+    let!(:wallet) { FactoryGirl.create(:wallet, user: user) }
+    let!(:wallet2) { FactoryGirl.create(:wallet, user: user) }
+    let!(:amount1) { FactoryGirl.create(:amount, wallet: wallet) }
+    let!(:amount2) { FactoryGirl.create(:amount, wallet: wallet) }
+    let!(:transaction) { FactoryGirl.create(:transaction, wallet: wallet) }
 
     it "should return all wallets for a user" do
       get :index, params: { user_id: user.id }
@@ -38,7 +38,7 @@ RSpec.describe Api::V1::WalletsController, type: :controller do
     end
 
     it "should create a new wallet for a user" do
-      post :create, params: { user_id: user.id, wallet:{ name: "New Wallet", user_id: user.id, base: "New Base"} }
+      post :create, params: { user_id: user.id, wallet: { name: "New Wallet", user_id: user.id, base: "New Base" } }
       expect(response).to have_http_status(:success)
 
       get :index, params: { user_id: user.id }
@@ -52,7 +52,7 @@ RSpec.describe Api::V1::WalletsController, type: :controller do
 
     it "should create a new transaction and amount" do
       Amount.create(symbol: "symbol", quantity: 10, wallet: wallet)
-      post :update, params: { user_id: user.id, id: wallet.id, trade:{ amount: 1.0, base_rate: 2, new_rate: 1, symbol_base: "symbol", symbol_new: "new symbol"} }
+      post :update, params: { user_id: user.id, id: wallet.id, trade: { amount: 1.0, base_rate: 2, new_rate: 1, symbol_base: "symbol", symbol_new: "new symbol" } }
       expect(response).to have_http_status(:success)
 
       get :show, params: { user_id: user.id, id: wallet.id }
@@ -70,7 +70,7 @@ RSpec.describe Api::V1::WalletsController, type: :controller do
     end
 
     it "should add quantity to an amount" do
-      post :update, params: { user_id: user.id, id: wallet.id, add_funds:{ amount: 1.0, base: amount1.symbol } }
+      post :update, params: { user_id: user.id, id: wallet.id, add_funds: { amount: 1.0, base: amount1.symbol } }
       expect(response).to have_http_status(:success)
 
       get :show, params: { user_id: user.id, id: wallet.id }
