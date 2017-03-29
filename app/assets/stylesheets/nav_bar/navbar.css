@@ -7,3 +7,17 @@
 .symbol {
   font-size: 200%
 }
+
+.title_link {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.top-bar ul {
+    background-color: transparent;;
+}

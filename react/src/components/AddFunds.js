@@ -26,7 +26,7 @@ class AddFunds extends Component {
       }
     });
 
-    fetch(`https://ctrader.herokuapp.com/api/v1/users/${this.props.user_id}/wallets/${this.props.wallet_id}.json`,
+    fetch(`http://localhost:3000/api/v1/users/${this.props.user_id}/wallets/${this.props.wallet_id}.json`,
       {
         method: "PATCH",
         headers: {
