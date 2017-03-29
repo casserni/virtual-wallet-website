@@ -13,10 +13,10 @@ RSpec.describe Api::V1::ExchangeRatesController, type: :controller do
       json = JSON.parse(response.body)
 
       expect(json.length).to eq(2)
-      expect(json[0]["rate"]).to eq(1.0)
-      expect(json[0]["symbol"]).to eq("symbol1")
-      expect(json[1]["rate"]).to eq(2.0)
-      expect(json[1]["symbol"]).to eq("symbol2")
+      expect(json[0]["rate"]).to eq(exchange_rate1.rate)
+      expect(json[0]["symbol"]).to eq(exchange_rate1.symbol)
+      expect(json[1]["rate"]).to eq(exchange_rate2.rate)
+      expect(json[1]["symbol"]).to eq(exchange_rate2.symbol)
     end
   end
 end
