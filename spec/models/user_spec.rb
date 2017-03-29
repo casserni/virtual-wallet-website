@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { should have_valid(:email).when("user@example.com", "another@email.com") }
-  it { should_not have_valid(:email).when(nil, '', "user", "users.com")}
+  it { should_not have_valid(:email).when(nil, '', "user", "users.com") }
 
   it "has a nonmatching password confirmation for the password" do
     user = User.new
