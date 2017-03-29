@@ -31,7 +31,7 @@ class NewWalletForm extends Component {
       }
     });
 
-    fetch(`https://ctrader.herokuapp.com/api/v1/users/${this.state.user_id}/wallets.json`,
+    fetch(`http://localhost:3000/api/v1/users/${this.state.user_id}/wallets.json`,
       {
         method: "post",
         headers: {
@@ -71,17 +71,23 @@ class NewWalletForm extends Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
+      <div className='row'>
+        <div className='small-5 column'>
         <label>
           Wallet Name:
-          <input type="text" name='name' value={this.state.name} onChange={this.handleChange} />
+          <input type="text" name='name' value={this.state.name} onChange={this.handleChange} className="textbox"/>
         </label>
+        </div>
+        <div className='small-5 column'>
         <label>
           Base currency:
           <select name="base" value={this.state.value} onChange={this.handleChange} className='dropdown'>
             {options}
           </select>
         </label>
+        </div>
         <input type="submit" value="Submit" />
+        </div>
       </form>
     );
   }

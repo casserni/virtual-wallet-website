@@ -18,10 +18,14 @@
   margin-top: 18px;
 }
 
-.cfd{
+input[type=text] {
+  text-align:center
+}
+
+/*.cfd{
   height: 30px;
   width: 50px;
-}
+}*/
 
 .cfn {
   text-align:left;

@@ -1,6 +1,6 @@
 let getExchangeRates = () => {
   return new Promise((resolve, reject) => {
-    fetch('https://ctrader.herokuapp.com/api/v1/days.json')
+    fetch('http://localhost:3000/api/v1/days.json')
     .then(response => {
       if (response.ok) {
         return response;
@@ -20,7 +20,7 @@ let getExchangeRates = () => {
 let getWallets = () => {
   let user_id = document.getElementById('current_user').innerHTML;
   return new Promise((resolve, reject) => {
-    fetch(`https://ctrader.herokuapp.com/api/v1/users/${user_id}/wallets.json`)
+    fetch(`http://localhost:3000/api/v1/users/${user_id}/wallets.json`)
     .then(response => {
       if (response.ok) {
         return response;
