@@ -21,11 +21,6 @@ ActiveRecord::Schema.define(version: 20170327233929) do
     t.integer "wallet_id",               null: false
   end
 
-  create_table "currencies", force: :cascade do |t|
-    t.string  "base"
-    t.integer "day_id"
-  end
-
   create_table "days", force: :cascade do |t|
     t.string "date", null: false
   end
