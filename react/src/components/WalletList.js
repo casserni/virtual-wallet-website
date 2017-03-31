@@ -38,11 +38,11 @@ class WalletList extends Component {
   }
 
   render() {
-    let selectedState=this.state.currentWallet
+    let selectedState=this.state.currentWallet;
     let walletList = this.state.wallets.map((wallet, index) => {
-      let className = 'wallet'
+      let className = 'wallet';
       if(wallet.id == selectedState){
-        className = 'wallet selected'
+        className = 'wallet selected';
       }
 
       return(<li className={className} key={index} id={wallet.id} onClick={this.handleClick}>{wallet.name}</li> )

@@ -50,7 +50,7 @@ class LineGraph extends Component {
                 },
               }],
             }
-          }
+          };
 
     const data = {
       labels: days.reverse(),

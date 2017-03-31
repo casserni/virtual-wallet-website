@@ -78,22 +78,22 @@ class Wallet extends Component {
 
   render() {
     this.sortAmounts();
-    let base="Base Value Not Existent"
-    let baseSymbol= this.props.base
+    let base="Base Value Not Existent";
+    let baseSymbol= this.props.base;
     let baseRate;
-    let value=0
-    let exchangeRates= this.state.exchangeRates
+    let value=0;
+    let exchangeRates= this.state.exchangeRates;
 
     exchangeRates.forEach((exchangeRate)=>{
       if(exchangeRate.symbol === baseSymbol){
-        baseRate = exchangeRate.rate
+        baseRate = exchangeRate.rate;
       }
-    })
+    });
 
     let amounts = this.state.amounts.map((amount, index) => {
         let output = exchangeRates.map((exchangeRate)=>{
           if(amount.symbol === exchangeRate.symbol){
-            value = value + amount.quantity * baseRate/exchangeRate.rate
+            value = value + amount.quantity * baseRate/exchangeRate.rate;
             return(
               <tr>
                 <td key={index} className="left">{amount.symbol}</td>
