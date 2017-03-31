@@ -10,6 +10,7 @@ class Wallet extends Component {
       amounts:[],
       transactions:[],
       exchangeRates:[],
+      yesterdayRates:[],
     };
     this.getAmounts = this.getAmounts.bind(this);
     this.getTransactions = this.getTransactions.bind(this);
@@ -72,7 +73,9 @@ class Wallet extends Component {
     this.props.getExchangeRates()
     .then(data => {
       let today = data[0].exchange_rates;
+      let yesterday = data[1].exchange_rates;
       this.setState({exchangeRates: today});
+      this.setState({yesterdayRates: yesterday});
     });
   }
 
@@ -81,8 +84,12 @@ class Wallet extends Component {
     let base="Base Value Not Existent";
     let baseSymbol= this.props.base;
     let baseRate;
+    let yesterdayRate;
     let value=0;
+    let yesterdayValue=0;
+    let className="right";
     let exchangeRates= this.state.exchangeRates;
+    let yesterdayRates = this.state.yesterdayRates;
 
     exchangeRates.forEach((exchangeRate)=>{
       if(exchangeRate.symbol === baseSymbol){
@@ -90,16 +97,38 @@ class Wallet extends Component {
       }
     });
 
+    yesterdayRates.forEach((exchangeRate)=>{
+      if(exchangeRate.symbol === baseSymbol){
+        yesterdayRate = exchangeRate.rate;
+      }
+    });
+
     let amounts = this.state.amounts.map((amount, index) => {
         let output = exchangeRates.map((exchangeRate)=>{
+          let sign;
+          let percent;
           if(amount.symbol === exchangeRate.symbol){
             value = value + amount.quantity * baseRate/exchangeRate.rate;
+            yesterdayRates.forEach((yesterdayExchangeRate)=>{
+              if(amount.symbol === yesterdayExchangeRate.symbol){
+                yesterdayValue = yesterdayValue + amount.quantity * yesterdayRate/yesterdayExchangeRate.rate;
+                percent = (((amount.quantity * baseRate/exchangeRate.rate) - (amount.quantity * yesterdayRate/yesterdayExchangeRate.rate))/(amount.quantity * yesterdayRate/yesterdayExchangeRate.rate) * 100).toFixed(3)
+                if (percent > 0) {
+                  className = "right p"
+                  sign = "+"
+                } else if (percent < 0) {
+                  className = "right n"
+                } else{
+                  className = "right same"
+                }
+              }
+            })
             return(
               <tr>
                 <td key={index} className="left">{amount.symbol}</td>
                 <td className='center'>{amount.quantity.toFixed(3)}</td>
                 <td className='center'>{(amount.quantity * baseRate/exchangeRate.rate).toFixed(3)} {baseSymbol}</td>
-                <td> </td>
+                <td className={className}>{sign}{percent}%</td>
               </tr>
             )
           }
@@ -111,12 +140,24 @@ class Wallet extends Component {
       return( <tr><td key={index}>{transaction.body}</td><td className='date'> {transaction.created_at}</td></tr> )
     })
 
+    let valuepercent=(value - yesterdayValue)/yesterdayValue * 100
+    let valueClass;
+    let valueSign;
+    if (valuepercent > 0){
+      valueClass = "p valuepercent"
+      valueSign = "+"
+    } else if( valuepercent < 0){
+      valueClass = "n valuepercent"
+    } else {
+      valueClass = 'same valuepercent'
+    }
+
     return (
       <div>
         <div className='info info1'>
           <p></p>
           <h2 className="walletname">{this.props.name}</h2>
-          <h2 className='value'> Portfolio Value: {value.toFixed(3)} {this.props.base}</h2>
+          <h2 className='value'>Value: {value.toFixed(3)} {this.props.base} <span className={valueClass}>{valueSign}{valuepercent.toFixed(3)}%</span></h2>
           <div className='row'>
             <div className='small-11 small-centered column'>
               <table>
@@ -156,13 +197,15 @@ class Wallet extends Component {
                 <tr><th className='description'>Description</th><th>Date</th></tr>
                 {transactions}
               </table>
-              <div className='right'>
-                <DeleteWallet
+            </div>
+          </div>
+          <div className='row'>
+            <div className='small-11 column small-centered right'>
+              <DeleteWallet
                 wallet_id = {this.props.id}
                 user_id = {this.props.user_id}
                 getWallets = {this.props.getWallets}
-                />
-              </div>
+              />
             </div>
           </div>
         </div>
