@@ -29,9 +29,12 @@ class DeleteWallet extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="submit" value="Delete" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="submit" value="Delete Portfolio" className='click'/>
+        </form>
+        <p></p>
+      </div>
     );
   }
 };

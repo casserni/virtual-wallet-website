@@ -77,18 +77,20 @@ class ConversionTable extends Component {
 
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
+        <br></br>
+        <h3 className='center conversiontabletitle'>Exchange Rates</h3>
+        <form onSubmit={this.handleSubmit}>
         <div className='row'>
-          <div className='small-8 small-centered column'>
-          <select value={this.state.value} onChange={this.handleChange} className='dropdown'>
-            {options}
-          </select>
+          <div className='center'>
+            <select value={this.state.value} onChange={this.handleChange} className='dropdown smaller'>
+              {options}
+            </select>
+            </div>
           </div>
-        </div>
-      </form>
-      <table cellspacing="0">
-        {rates}
-      </table>
+        </form>
+        <table cellspacing="0">
+          {rates}
+        </table>
       </div>
     );
   }

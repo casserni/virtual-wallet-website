@@ -5,19 +5,51 @@
 }
 
 .symbol {
-  font-size: 200%
+  font-size: 150%
 }
 
 .title_link {
   text-decoration: none;
   background-color: transparent;
+  font-size: 200%;
+  color: white
 }
+
+a:link    {
+  /* Applies to all unvisited links */
+  text-decoration: none;
+  background-color: transparent;
+  color: white
+  }
 
 a:visited {
-    color: white;
-    text-decoration: none;
-}
+  /* Applies to all visited links */
+  text-decoration: none;
+  background-color: transparent;
+  color: white
+  }
+a:hover   {
+  /* Applies to links under the pointer */
+  text-decoration: none;
+  background-color: transparent;
+  color: white
+  }
+a:active  {
+  /* Applies to activated links */
+  text-decoration: none;
+  background-color: transparent;
+  color: white
+  }
 
 .top-bar ul {
-    background-color: transparent;;
+    background-color: transparent;
+}
+
+.signup {
+  padding-right: 0px;
+  margin-top: 24px;
+}
+
+.signinlink {
+  padding-right: 15px;
 }

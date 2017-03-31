@@ -22,7 +22,11 @@ class WalletList extends Component {
     this.props.getWallets()
     .then(data => {
       this.setState({wallets: data});
-      this.setState({currentWallet: 0});
+      if(data.length > 0){
+        this.setState({currentWallet: data[data.length-1].id});
+      } else {
+        this.setState({currentWallet: 0});
+      }
     });
   }
 
@@ -34,11 +38,21 @@ class WalletList extends Component {
   }
 
   render() {
+    let selectedState=this.state.currentWallet;
     let walletList = this.state.wallets.map((wallet, index) => {
-      return(<li className='wallet' key={index} id={wallet.id} onClick={this.handleClick}>{wallet.name}</li> )
+      let className = 'wallet';
+      if(wallet.id == selectedState){
+        className = 'wallet selected';
+      }
+
+      return(<li className={className} key={index} id={wallet.id} onClick={this.handleClick}>{wallet.name}</li> )
     })
 
-    walletList.push(<li className='wallet' key={-1} id={0} onClick={this.handleClick}>New Portfolio</li>)
+    let className='wallet'
+    if(0 == selectedState){
+      className = 'wallet selected'
+    }
+    walletList.push(<li className={className} key={-1} id={0} onClick={this.handleClick}>Add Portfolio</li>)
 
     let selectedWallet;
     if (this.state.currentWallet === 0){

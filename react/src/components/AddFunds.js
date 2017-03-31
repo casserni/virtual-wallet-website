@@ -4,7 +4,7 @@ class AddFunds extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount:'1',
+      amount:'1.00',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,12 +54,17 @@ class AddFunds extends Component {
   render() {
     return (
       <div>
+      <h3 className='exchangetitle'>Deposit</h3>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Amount:
-            <input type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Add Funds" />
+          <div className='row'>
+            <div className='small-8 column padding'>
+              <input className='textbox smaller' type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
+            </div>
+            <p className='small-1 column padding words'> {this.props.base}</p>
+            <div className="small-3 column padding">
+              <input type="submit" value="Add Funds" className='smaller1 click'/>
+            </div>
+          </div>
         </form>
       </div>
     );

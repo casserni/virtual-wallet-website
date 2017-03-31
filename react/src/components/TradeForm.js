@@ -4,7 +4,7 @@ class TradeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount:'1',
+      amount:'1.00',
       base_rate: 1,
       new_rate: 1,
       symbol_base:'USD',
@@ -67,18 +67,6 @@ class TradeForm extends Component {
     });
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   let base_amount;
-  //   let new_amount;
-  //   if (this.state.base_amount !== prevState.base_amount) {
-  //     new_amount = (this.state.base_amount * this.state.new_rate/this.state.base_rate).toFixed(4);
-  //     this.setState({new_amount: new_amount.toString()});
-  //   } else if (this.state.new_amount !== prevState.new_amount) {
-  //       base_amount = (this.state.new_amount * this.state.base_rate/this.state.new_rate).toFixed(4);
-  //       this.setState({base_amount: base_amount.toString()});
-  //     }
-  // }
-
   componentDidMount() {
     this.props.getExchangeRates()
       .then(data => {
@@ -93,18 +81,27 @@ class TradeForm extends Component {
     })
     return (
       <div>
+      <h3 className='exchangetitle'>Exchange</h3>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Amount:
-            <input type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
-          </label>
-          <select name='base_rate' value={this.state.base_rate} onChange={this.handleChange} className='dropdown'>
-            {options}
-          </select>
-          <select name='new_rate' value={this.state.new_rate} onChange={this.handleChange} className='dropdown'>
-            {options}
-          </select>
-          <input type="submit" value="Trade" />
+          <div className='row'>
+            <div className='small-6 column padding'>
+              <input className='textbox smaller' type="text" name='amount' value={this.state.amount} onChange={this.handleChange} />
+            </div>
+            <div className='small-2 column padding'>
+            <select name='base_rate' value={this.state.base_rate} onChange={this.handleChange} className='dropdown smaller'>
+              {options}
+            </select>
+            </div>
+            <p className='small-1 column padding words'> for </p>
+            <div className='small-2 column padding'>
+            <select name='new_rate' value={this.state.new_rate} onChange={this.handleChange} className='dropdown smaller'>
+              {options}
+            </select>
+            </div>
+            <div className="small-1 column padding">
+              <input type="submit" value="Trade" className="smaller1 click"/>
+            </div>
+          </div>
         </form>
       </div>
     );

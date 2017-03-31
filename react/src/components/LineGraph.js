@@ -31,23 +31,29 @@ class LineGraph extends Component {
       rates.push(rate);
     });
 
+    const options = {
+            scales:{
+              xAxes: [{
+                gridLines: {
+                    display: true,
+                  },
+                ticks: {
+                  fontColor: "rgb(255, 255, 255)", // this here
+                },
+              }],
+              yAxes: [{
+                gridLines: {
+                    display: true,
+                },
+                ticks: {
+                  fontColor: "rgb(255, 255, 255)", // this here
+                },
+              }],
+            }
+          };
+
     const data = {
       labels: days.reverse(),
-
-      options: {
-        scales:{
-          xAxes:[{
-            gridLines:{
-              color:"rgba(255,255,255)",
-              zeroLineColor:"rgba(255,255,255)"
-            }
-          }],
-          yAxes:[{
-            display:false
-          }],
-        }
-      },
-
       datasets: [
         {
           label: baseSymbol+' to '+ newSymbol,
@@ -76,7 +82,7 @@ class LineGraph extends Component {
     return (
       <div className="row">
         <div className='small-11 small-centered column'>
-        <Line data={data} />
+          <Line data={data} options={options} />
         </div>
         <br></br>
       </div>
