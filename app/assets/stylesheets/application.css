@@ -31,6 +31,10 @@
   margin-bottom: 25px;
 }
 
+.info1 {
+  border-top-left-radius: 0px;
+}
+
 label {
   color: inherit;
 }
@@ -75,13 +79,22 @@ table {
     padding: 0px;
     overflow: hidden;
     background-color: inherit;
+    margin-bottom: 0px;
 }
 
 .wallet {
   font-size: 80%;
   padding: 10px;
   float: left;
+  background-color: #191722;
+  color: white;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  opacity: .9;
+}
 
+.selected {
+  background-color: #282537;
 }
 
 .wallet:hover {
@@ -90,10 +103,11 @@ table {
 }
 
 .textbox {
+  border-color: black;
   border-radius: 5px;
   background-color: white;
+  font-size: 13px;
 }
-
 
 body {
   margin: 0px;
@@ -109,4 +123,37 @@ body {
   font-family: "Lato";
   text-align: center;
   text-align-last: center;
+  width: 50px;
+}
+
+.dropdown:hover{
+  cursor:pointer;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+  padding-left: 4px;
+}
+
+.right {
+  text-align: right;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-weight: 500;
+  font-family: "Lato"
+}
+
+.newwalletbase {
+  font-family: "Lato";
+  text-align: center;
+  text-align-last: center;
+}
+
+.click:hover {
+  cursor: pointer;
 }

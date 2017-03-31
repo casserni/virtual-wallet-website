@@ -9,6 +9,7 @@ class Wallet extends Component {
     this.state = {
       amounts:[],
       transactions:[],
+      exchangeRates:[],
     };
     this.getAmounts = this.getAmounts.bind(this);
     this.getTransactions = this.getTransactions.bind(this);
@@ -68,48 +69,103 @@ class Wallet extends Component {
   componentDidMount(){
     this.getAmounts();
     this.getTransactions();
+    this.props.getExchangeRates()
+    .then(data => {
+      let today = data[0].exchange_rates;
+      this.setState({exchangeRates: today});
+    });
   }
 
   render() {
     this.sortAmounts();
+    let base="Base Value Not Existent"
+    let baseSymbol= this.props.base
+    let baseRate;
+    let value=0
+    let exchangeRates= this.state.exchangeRates
+
+    exchangeRates.forEach((exchangeRate)=>{
+      if(exchangeRate.symbol === baseSymbol){
+        baseRate = exchangeRate.rate
+      }
+    })
 
     let amounts = this.state.amounts.map((amount, index) => {
-      return( <li key={index}>{amount.symbol}: {amount.quantity}</li> )
+        let output = exchangeRates.map((exchangeRate)=>{
+          if(amount.symbol === exchangeRate.symbol){
+            value = value + amount.quantity * baseRate/exchangeRate.rate
+            return(
+              <tr>
+                <td key={index} className="left">{amount.symbol}</td>
+                <td className='center'>{amount.quantity.toFixed(3)}</td>
+                <td className='center'>{(amount.quantity * baseRate/exchangeRate.rate).toFixed(3)} {baseSymbol}</td>
+                <td> </td>
+              </tr>
+            )
+          }
+        })
+      return (output)
     })
 
     let transactions = this.state.transactions.map((transaction, index)=>{
-      return( <li key={index}>{transaction.body}</li> )
+      return( <tr><td key={index}>{transaction.body}</td><td className='date'> {transaction.created_at}</td></tr> )
     })
 
     return (
       <div>
-        <p>{this.props.name}</p>
-        <ul>
-          {amounts}
-        </ul>
-        <AddFunds
-          wallet_id = {this.props.id}
-          user_id = {this.props.user_id}
-          base = {this.props.base}
-          getAmounts = {this.getAmounts}
-          getTransactions = {this.getTransactions}
-        />
-        <TradeForm
-          wallet_id = {this.props.id}
-          user_id = {this.props.user_id}
-          getAmounts = {this.getAmounts}
-          getExchangeRates = {this.props.getExchangeRates}
-          getTransactions = {this.getTransactions}
-        />
-        <DeleteWallet
-          wallet_id = {this.props.id}
-          user_id = {this.props.user_id}
-          getWallets = {this.props.getWallets}
-        />
-        <h3>Transaction History </h3>
-        <ul>
-          {transactions}
-        </ul>
+        <div className='info info1'>
+          <p></p>
+          <h2 className="walletname">{this.props.name}</h2>
+          <h2 className='value'> Portfolio Value: {value.toFixed(3)} {this.props.base}</h2>
+          <div className='row'>
+            <div className='small-11 small-centered column'>
+              <table>
+                <tr><th className="left">Currency</th><th className='center'>Quantity</th><th className='center'>Value Breakdown</th><th className='right'>% Change </th></tr>
+                {amounts}
+              </table>
+            </div>
+            <p></p>
+            <div className='small-11 small-centered column'>
+              <div className='small-5 column'>
+                <TradeForm
+                  wallet_id = {this.props.id}
+                  user_id = {this.props.user_id}
+                  getAmounts = {this.getAmounts}
+                  getExchangeRates = {this.props.getExchangeRates}
+                  getTransactions = {this.getTransactions}
+                />
+              </div>
+              <div className='small-5 small-offset-2 column'>
+                <AddFunds
+                  wallet_id = {this.props.id}
+                  user_id = {this.props.user_id}
+                  base = {this.props.base}
+                  getAmounts = {this.getAmounts}
+                  getTransactions = {this.getTransactions}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='info'>
+          <p></p>
+          <h3 className="transaction_title">Transaction History </h3>
+          <div className="transaction_list row">
+            <div className="small-11 small-centered column">
+              <table>
+                <tr><th className='description'>Description</th><th>Date</th></tr>
+                {transactions}
+              </table>
+              <div className='right'>
+                <DeleteWallet
+                wallet_id = {this.props.id}
+                user_id = {this.props.user_id}
+                getWallets = {this.props.getWallets}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

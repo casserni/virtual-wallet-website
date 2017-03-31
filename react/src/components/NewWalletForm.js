@@ -70,25 +70,31 @@ class NewWalletForm extends Component {
     })
 
     return (
-      <form onSubmit={this.handleSubmit}>
-      <div className='row'>
-        <div className='small-5 column'>
-        <label>
-          Wallet Name:
-          <input type="text" name='name' value={this.state.name} onChange={this.handleChange} className="textbox"/>
-        </label>
-        </div>
-        <div className='small-5 column'>
-        <label>
-          Base currency:
-          <select name="base" value={this.state.value} onChange={this.handleChange} className='dropdown'>
-            {options}
-          </select>
-        </label>
-        </div>
-        <input type="submit" value="Submit" />
-        </div>
-      </form>
+      <div className='info info1'>
+        <p></p>
+        <h2 className='center'>Add Portfolio</h2>
+        <form onSubmit={this.handleSubmit}>
+          <div className='row'>
+            <div className='small-8 small-centered column'>
+              <label>
+                Wallet Name:
+                <input type="text" name='name' value={this.state.name} onChange={this.handleChange} className="textbox"/>
+              </label>
+            </div>
+            <div className= 'small-8 small-centered column'>
+              <label>
+                Base currency:
+                <select name="base" value={this.state.value} onChange={this.handleChange} className='newwalletbase click'>
+                  {options}
+                </select>
+              </label>
+            </div>
+            <div className='small-1 small-centered column'>
+              <input type="submit" value="Create" className="sign click"/>
+            </div>
+          </div>
+        </form>
+      </div>
     );
   }
 }

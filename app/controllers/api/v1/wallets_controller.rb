@@ -25,9 +25,11 @@ class Api::V1::WalletsController < ApplicationController
 
   def update
     if !params[:add_funds].nil?
-      base = Amount.where(wallet_id: params[:id], symbol: add_funds_params[:base])[0]
-      base.update_attribute(:quantity, (base.quantity + add_funds_params[:amount].to_f))
-      Transaction.create(wallet_id: params[:id], body: "#{add_funds_params[:amount].to_f} #{add_funds_params[:base]} was deposited")
+      if add_funds_params[:amount].to_f > 0
+        base = Amount.where(wallet_id: params[:id], symbol: add_funds_params[:base])[0]
+        base.update_attribute(:quantity, (base.quantity + add_funds_params[:amount].to_f))
+        Transaction.create(wallet_id: params[:id], body: "#{add_funds_params[:amount].to_f} #{add_funds_params[:base]} was deposited")
+      end
 
     elsif !params[:trade].nil?
       symbol_base = trade_params[:symbol_base]
