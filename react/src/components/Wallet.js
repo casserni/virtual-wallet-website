@@ -112,17 +112,18 @@ class Wallet extends Component {
             yesterdayRates.forEach((yesterdayExchangeRate)=>{
               if(amount.symbol === yesterdayExchangeRate.symbol){
                 yesterdayValue = yesterdayValue + amount.quantity * yesterdayRate/yesterdayExchangeRate.rate;
-                percent = (((amount.quantity * baseRate/exchangeRate.rate) - (amount.quantity * yesterdayRate/yesterdayExchangeRate.rate))/(amount.quantity * yesterdayRate/yesterdayExchangeRate.rate) * 100).toFixed(3)
+                percent = (((amount.quantity * baseRate/exchangeRate.rate) - (amount.quantity * yesterdayRate/yesterdayExchangeRate.rate))/(amount.quantity * yesterdayRate/yesterdayExchangeRate.rate) * 100).toFixed(3);
                 if (percent > 0) {
-                  className = "right p"
-                  sign = "+"
+                  className = "right p";
+                  sign = "+";
                 } else if (percent < 0) {
-                  className = "right n"
+                  className = "right n";
                 } else{
-                  className = "right same"
+                  className = "right same";
                 }
               }
-            })
+            });
+            
             return(
               <tr>
                 <td key={index} className="left">{amount.symbol}</td>
