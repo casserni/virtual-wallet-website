@@ -85,8 +85,8 @@ class Wallet extends Component {
     let baseSymbol= this.props.base;
     let baseRate;
     let yesterdayRate;
-    let value=0;
-    let yesterdayValue=0;
+    let value = 0;
+    let yesterdayValue = 0;
     let className="right";
     let exchangeRates= this.state.exchangeRates;
     let yesterdayRates = this.state.yesterdayRates;
@@ -113,6 +113,9 @@ class Wallet extends Component {
               if(amount.symbol === yesterdayExchangeRate.symbol){
                 yesterdayValue = yesterdayValue + amount.quantity * yesterdayRate/yesterdayExchangeRate.rate;
                 percent = (((amount.quantity * baseRate/exchangeRate.rate) - (amount.quantity * yesterdayRate/yesterdayExchangeRate.rate))/(amount.quantity * yesterdayRate/yesterdayExchangeRate.rate) * 100).toFixed(3);
+                if (amount.quantity == 0) {
+                  percent = 0
+                }
                 if (percent > 0) {
                   className = "right p";
                   sign = "+";
@@ -142,6 +145,10 @@ class Wallet extends Component {
     })
 
     let valuepercent=(value - yesterdayValue)/yesterdayValue * 100
+    if (yesterdayValue == 0){
+      valuepercent = 0
+    }
+    
     let valueClass;
     let valueSign;
     if (valuepercent > 0){
