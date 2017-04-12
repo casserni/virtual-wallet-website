@@ -11,30 +11,30 @@ Nick Cassera
 
 Heroku link: https://ctrader.herokuapp.com/
 
-Features:
+* Features:
 
-Ability to sign up, sign in, sign out As a user you can
-Create a Portfolio
-Simulate depositing funds
-Trade to other currencies
-Delete Portfolios
-Tab through all portfolios without full page reloads
-See percentage increase as well as a calculated value
+  Ability to sign up, sign in, sign out As a user you can
+    - Create a Portfolio
+    - Simulate depositing funds
+    - Trade to other currencies
+    - Delete Portfolios
+    - Tab through all portfolios without full page reloads
+    - See percentage increase as well as a calculated value
 
-All users can
-User the conversion form
-See an interactive line graph of historical database
-Swith to view the current exchange rate between 30+ different currencies
+  All users can
+    - User the conversion form
+    - See an interactive line graph of historical database
+    - Switch to view the current exchange rate between 30+ different currencies
 
-Technologies incorporated:
-
-Ruby version 2.3.3 (Rails framework)
-React for the front end
-Foundation for styling
-Devise for user interaction
-SQL and ActiveRecord for database maintenance
-Chartjs for graphing
-API integration
-RSpec/Capybara for testing suite
-Github for collaboration
-Heroku for deployment
+* Technologies incorporated:
+  - Ruby version 2.3.3 (Rails framework)
+  - React for the front end
+  - Foundation for styling
+  - Devise for user interaction
+  - SQL and ActiveRecord for database maintenance
+  - Chartjs for graphing
+  - API integration (through fetch requests)
+  - Heroku Scheduler
+  - RSpec/Capybara for testing suite
+  - Github for collaboration
+  - Heroku for deployment
